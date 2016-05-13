@@ -1,0 +1,9 @@
+Package: [[artifactId]]
+Version: [[version]]
+Section: misc
+Priority: low
+Architecture: all
+Description: ${project.artifactId} is here
+Maintainer: foo@example.com
+Depends:
+Recommends:

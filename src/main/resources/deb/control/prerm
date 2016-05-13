@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# make sure it's dead
+service ${project.artifactId} stop
+killall -9 -u ${project.artifactId} &> /dev/null || /bin/true
+
+# rm init script stuff
+update-rc.d ${project.artifactId} remove
+rm -f /etc/init.d/${project.artifactId}
+
+# rm logs
+rm -f /var/log/${project.artifactId}.log
+
+# rm system user
+deluser --system ${project.artifactId}

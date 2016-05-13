@@ -1,0 +1,8 @@
+#!/bin/sh
+
+chmod +x /usr/share/${project.artifactId}/*.jar
+
+ln -fs /usr/share/${project.artifactId}/${project.artifactId}.jar /etc/init.d/${project.artifactId}
+
+update-rc.d ${project.artifactId} defaults
+service ${project.artifactId} start
