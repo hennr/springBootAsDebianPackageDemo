@@ -11,5 +11,6 @@ rm -f /etc/init.d/${project.artifactId}
 # rm logs
 rm -f /var/log/${project.artifactId}.log
 
-# rm system user
+# rm system user and group
 deluser --system ${project.artifactId}
+delgroup --system ${project.artifactId}

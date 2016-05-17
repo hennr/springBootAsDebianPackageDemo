@@ -1,3 +1,4 @@
 #!/bin/sh
 
+addgroup --system ${project.artifactId}
 adduser --system --no-create-home --disabled-password --disabled-login ${project.artifactId}
