@@ -16,27 +16,40 @@ This approach has some benefits:
 (http://docs.spring.io/spring-boot/docs/current/reference/html/howto-embedded-servlet-containers.html#howto-use-jetty-instead-of-tomcat)
  e.g. in case of a security issue in tomcat
 
-The application will run as the user that owns the jar, will create a pid file automatically and log to /var/log/<appName>.
+The application will run as the user who owns the jar, will create a pid to track it's state and log to /var/log/<appName>.
 Have a look at [the spring boot documentation](http://docs.spring.io/spring-boot/docs/current/reference/html/deployment-install.html), too.
 
 To get you started as fast as possible, I created this demo project which will bundle a debian package via [jdeb](https://github.com/tcurdt/jdeb).
-The package will add a user, create needed default folders and set permission properly.
-The user and the service will take the name of your mvn artifactId automatically.
 
-To test your I included a vagrant box as well.
+The package will:
 
-## prerequisites
+* add a system group and a matching user following your artifactId as names
+* create needed default folders
+* set permissions properly
+* follow [spring boot's security guidelines](http://docs.spring.io/spring-boot/docs/current/reference/html/deployment-install.html#deployment-initd-service-securing) which meas that:
+	* the user will not be able to log into your system
+	* the jar will only be readable and executable (not writable) by the created user
+
+**Note**: the user, the group and the service will take the name of your mvn artifactId.
+
+
+## Giving it a try
+
+You may build and install your own debian package into a vagrant box now.
+
+### prerequisites
 
 Install `vagrant, virtualbox, maven`
 
-## build the app with:
+### build the debian package with:
 
     mvn clean package
 
-after building your application you are good to fire up the vagrant box which will install java and the deb package automatically:
+after that you are good to fire up the vagrant box which will install java and the deb package [automatically](provision-vm.sh):
 
     vagrant up
 
 
 Feel free to play around now and when you are done delete your vagrant VM via `vagrant destroy`.
+
 Patches and comments are welcome.
