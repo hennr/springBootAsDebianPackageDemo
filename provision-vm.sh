@@ -9,7 +9,7 @@ if [ -f /vagrant/target/*.deb ]
 then
   sudo dpkg -i /vagrant/target/*.deb;
 else
-  echo "ERROR: No *.deb file found. Did you run 'mvn package already?'"
+  echo "ERROR: No *.deb file found. Did you run 'mvn package' already?"
   exit 1
 fi
 
